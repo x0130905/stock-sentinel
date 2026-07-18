@@ -1,0 +1,26 @@
+import type { AlertRecord, AppData, Backtests, Dashboard } from './types'
+
+const CACHE_KEY = 'stock-sentinel-data-v1'
+
+async function fetchJson<T>(path: string): Promise<T> {
+  const response = await fetch(path, { cache: 'no-store' })
+  if (!response.ok) throw new Error(`${path} 返回 HTTP ${response.status}`)
+  return response.json() as Promise<T>
+}
+
+export async function loadAppData(): Promise<AppData> {
+  try {
+    const [dashboard, alertPayload, backtests] = await Promise.all([
+      fetchJson<Dashboard>('./data/dashboard.json'),
+      fetchJson<{ alerts: AlertRecord[] }>('./data/alerts.json'),
+      fetchJson<Backtests>('./data/backtests.json'),
+    ])
+    const data: AppData = { dashboard, alerts: alertPayload.alerts, backtests, cached: false }
+    localStorage.setItem(CACHE_KEY, JSON.stringify(data))
+    return data
+  } catch (error) {
+    const cached = localStorage.getItem(CACHE_KEY)
+    if (cached) return { ...(JSON.parse(cached) as AppData), cached: true }
+    throw error
+  }
+}

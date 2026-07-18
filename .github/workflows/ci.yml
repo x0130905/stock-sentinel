@@ -1,0 +1,43 @@
+name: 自动测试
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: 安装 Python 依赖
+        run: pip install -e '.[dev,yfinance]'
+      - name: Python 代码检查
+        run: ruff check src tests
+      - name: Python 自动测试
+        run: pytest --cov=stock_sentinel --cov-report=term-missing
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+          cache-dependency-path: frontend/pnpm-lock.yaml
+      - name: 安装前端依赖
+        working-directory: frontend
+        run: pnpm install --frozen-lockfile
+      - name: 前端自动测试
+        working-directory: frontend
+        run: pnpm test
+      - name: 构建 PWA
+        working-directory: frontend
+        run: pnpm build

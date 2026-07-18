@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "provider": "sample",
+  "history_period": "2y",
+  "analysis_frequency_minutes": 15,
+  "timezone": "Asia/Shanghai",
+  "stocks": [
+    {
+      "symbol": "AAPL",
+      "name": "Apple",
+      "market": "US",
+      "cost_basis": 180.0,
+      "quantity": 10,
+      "target_return_percent": 12,
+      "max_loss_percent": 8,
+      "take_profit_price": 220.0,
+      "stop_loss_price": 165.0,
+      "email_enabled": true,
+      "buy_alert_enabled": true,
+      "sell_alert_enabled": true,
+      "daily_summary_enabled": true
+    },
+    {
+      "symbol": "MSFT",
+      "name": "Microsoft",
+      "market": "US",
+      "cost_basis": 420.0,
+      "quantity": 5,
+      "target_return_percent": 10,
+      "max_loss_percent": 7,
+      "take_profit_price": 480.0,
+      "stop_loss_price": 390.0,
+      "email_enabled": true,
+      "buy_alert_enabled": true,
+      "sell_alert_enabled": true,
+      "daily_summary_enabled": true
+    },
+    {
+      "symbol": "NVDA",
+      "name": "NVIDIA",
+      "market": "US",
+      "cost_basis": 120.0,
+      "quantity": 20,
+      "target_return_percent": 15,
+      "max_loss_percent": 10,
+      "take_profit_price": 150.0,
+      "stop_loss_price": 105.0,
+      "email_enabled": true,
+      "buy_alert_enabled": true,
+      "sell_alert_enabled": true,
+      "daily_summary_enabled": true
+    }
+  ],
+  "scoring": {
+    "buy_alert_threshold": 65,
+    "sell_alert_threshold": 65,
+    "rsi_oversold": 30,
+    "rsi_overbought": 70,
+    "near_level_atr_multiple": 1.0,
+    "abnormal_daily_change_percent": 7.0,
+    "high_volatility_annualized": 0.45,
+    "high_drawdown_percent": 25.0
+  },
+  "alerts": {
+    "cooldown_hours": 4,
+    "consecutive_failure_threshold": 3,
+    "simulation_mode": true,
+    "live_alerts_enabled": false,
+    "backtest_required": true
+  },
+  "backtest": {
+    "initial_cash": 100000,
+    "fee_rate": 0.001,
+    "slippage_rate": 0.0005,
+    "start_date": null,
+    "end_date": null
+  }
+}

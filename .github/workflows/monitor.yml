@@ -1,0 +1,68 @@
+name: 行情监测
+
+on:
+  schedule:
+    - cron: '*/15 * * * 1-5'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: '忽略交易时段限制，用于手动测试'
+        required: false
+        default: true
+        type: boolean
+
+concurrency:
+  group: stock-sentinel-monitor
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  monitor:
+    if: github.event_name == 'workflow_dispatch' || (vars.STOCK_DATA_PROVIDER != '' && vars.STOCK_DATA_PROVIDER != 'sample')
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      STOCK_DATA_PROVIDER: ${{ vars.STOCK_DATA_PROVIDER || 'sample' }}
+      ALPHA_VANTAGE_API_KEY: ${{ secrets.ALPHA_VANTAGE_API_KEY }}
+      TWELVE_DATA_API_KEY: ${{ secrets.TWELVE_DATA_API_KEY }}
+      EMAIL_ENABLED: ${{ vars.EMAIL_ENABLED || 'false' }}
+      EMAIL_PROVIDER: ${{ vars.EMAIL_PROVIDER || 'resend' }}
+      EMAIL_TO: ${{ secrets.EMAIL_TO }}
+      EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      SMTP_HOST: ${{ secrets.SMTP_HOST }}
+      SMTP_PORT: ${{ secrets.SMTP_PORT }}
+      SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+      SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+      SMTP_USE_SSL: ${{ vars.SMTP_USE_SSL || 'true' }}
+      SITE_URL: ${{ vars.SITE_URL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: 安装分析程序
+        run: pip install -e '.[yfinance]'
+      - name: 定时监测
+        if: github.event_name == 'schedule' || inputs.force == false
+        run: stock-sentinel monitor
+      - name: 手动强制监测
+        if: github.event_name == 'workflow_dispatch' && inputs.force == true
+        run: stock-sentinel monitor --force
+      - name: 提交更新后的静态数据
+        run: |
+          if git diff --quiet -- data frontend/public/data; then
+            echo "行情结果没有变化"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data frontend/public/data
+          git commit -m "chore: update market analysis data"
+          git push
+      - name: 失败邮件通知
+        if: failure()
+        run: stock-sentinel notify-failure
