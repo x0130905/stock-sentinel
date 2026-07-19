@@ -1,6 +1,32 @@
 {
   "alerts": [
     {
+      "id": "dfd5d85b-be31-4d09-b76d-1fe08f39e287",
+      "symbol": "NVDA",
+      "name": "NVIDIA",
+      "alert_type": "take_profit",
+      "label": "触发止盈参考价",
+      "reason": "当前价 266.30 ≥ 止盈价 150.00",
+      "price": 266.301,
+      "score": 15,
+      "created_at": "2026-07-19T08:51:21.615197+00:00",
+      "sent": false,
+      "simulated": true
+    },
+    {
+      "id": "abc2b912-cc12-4d94-bd1b-6198cf5c1bdb",
+      "symbol": "MSFT",
+      "name": "Microsoft",
+      "alert_type": "stop_loss",
+      "label": "触发止损参考价",
+      "reason": "当前价 258.57 ≤ 止损价 390.00",
+      "price": 258.5662,
+      "score": 35,
+      "created_at": "2026-07-19T08:51:21.615095+00:00",
+      "sent": false,
+      "simulated": true
+    },
+    {
       "id": "46a1c3f9-fe0a-4a04-8455-6ddd62e2528c",
       "symbol": "MSFT",
       "name": "Microsoft",
