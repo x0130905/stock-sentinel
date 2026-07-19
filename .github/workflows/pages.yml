@@ -7,6 +7,10 @@ on:
       - 'frontend/**'
       - 'data/**'
       - '.github/workflows/pages.yml'
+  workflow_run:
+    workflows: ['行情监测']
+    types: [completed]
+    branches: [main]
   workflow_dispatch:
 
 concurrency:
@@ -20,6 +24,7 @@ permissions:
 
 jobs:
   build-and-deploy:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -27,6 +32,8 @@ jobs:
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: pnpm/action-setup@v4
         with:
           version: 10
