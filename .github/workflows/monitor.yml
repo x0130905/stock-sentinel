@@ -2,7 +2,8 @@ name: 行情监测
 
 on:
   schedule:
-    - cron: '*/15 * * * 1-5'
+    # GitHub cron 使用 UTC：08:30 = 北京时间交易日 16:30
+    - cron: '30 8 * * 1-5'
   workflow_dispatch:
     inputs:
       force:
@@ -45,7 +46,7 @@ jobs:
           python-version: '3.12'
           cache: pip
       - name: 安装分析程序
-        run: pip install -e '.[yfinance]'
+        run: pip install -e .
       - name: 定时监测
         if: github.event_name == 'schedule' || inputs.force == false
         run: stock-sentinel monitor

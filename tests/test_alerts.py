@@ -21,3 +21,19 @@ def test_regular_alert_is_deduplicated_but_stop_loss_is_not() -> None:
     assert sum(item.alert_type == "stop_loss" for item in first) == 1
     assert not any(item.alert_type == "buy_score" for item in second)
     assert sum(item.alert_type == "stop_loss" for item in second) == 1
+
+
+def test_score_alert_requires_two_distinct_confirmations_when_configured() -> None:
+    stock = StockConfig(symbol="510300.SHH", name="沪深300ETF", buy_alert_enabled=True)
+    result = analyze_market_data(SampleProvider().fetch("510300.SHH", "6mo"), stock, {})
+    result = replace(result, buy_score=90)
+    state: dict = {}
+    settings = {"cooldown_hours": 24, "score_confirmation_runs": 2}
+
+    first = build_alerts(result, stock, {"buy_alert_threshold": 70}, settings, state)
+    second = build_alerts(result, stock, {"buy_alert_threshold": 70}, settings, state)
+    third = build_alerts(result, stock, {"buy_alert_threshold": 70}, settings, state)
+
+    assert not any(item.alert_type == "buy_score" for item in first)
+    assert sum(item.alert_type == "buy_score" for item in second) == 1
+    assert not any(item.alert_type == "buy_score" for item in third)
