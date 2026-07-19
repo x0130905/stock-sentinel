@@ -65,3 +65,5 @@ jobs:
           git add data frontend/public/data
           git commit -m "chore: update intraday risk snapshot"
           git push
+
+# workflow registration refresh
