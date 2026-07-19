@@ -1,1 +1,1 @@
--e .[dev,yfinance]
+-e .[dev,yfinance,intraday]

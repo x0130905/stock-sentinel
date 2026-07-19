@@ -1,0 +1,67 @@
+name: 盘中风险检查
+
+on:
+  schedule:
+    # 完整15分钟K线形成后运行：北京时间 09:45-11:30、13:15-15:00
+    - cron: '45 1 * * 1-5'
+    - cron: '0,15,30,45 2 * * 1-5'
+    - cron: '0,15,30 3 * * 1-5'
+    - cron: '15,30,45 5 * * 1-5'
+    - cron: '0,15,30,45 6 * * 1-5'
+    - cron: '0 7 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: '忽略交易时段限制，用于手动验证免费行情源'
+        required: false
+        default: true
+        type: boolean
+
+concurrency:
+  group: stock-sentinel-intraday
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  intraday-risk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      EMAIL_ENABLED: ${{ vars.EMAIL_ENABLED || 'false' }}
+      EMAIL_PROVIDER: ${{ vars.EMAIL_PROVIDER || 'resend' }}
+      EMAIL_TO: ${{ secrets.EMAIL_TO }}
+      EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      SMTP_HOST: ${{ secrets.SMTP_HOST }}
+      SMTP_PORT: ${{ secrets.SMTP_PORT }}
+      SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+      SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+      SMTP_USE_SSL: ${{ vars.SMTP_USE_SSL || 'true' }}
+      SITE_URL: ${{ vars.SITE_URL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: 安装盘中检查程序
+        run: pip install -e '.[intraday]'
+      - name: 定时盘中风险检查
+        if: github.event_name == 'schedule' || inputs.force == false
+        run: stock-sentinel intraday-risk
+      - name: 手动强制检查
+        if: github.event_name == 'workflow_dispatch' && inputs.force == true
+        run: stock-sentinel intraday-risk --force
+      - name: 提交盘中快照和风险状态
+        run: |
+          if git diff --quiet -- data frontend/public/data; then
+            echo "盘中结果没有变化"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data frontend/public/data
+          git commit -m "chore: update intraday risk snapshot"
+          git push

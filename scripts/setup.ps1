@@ -36,7 +36,7 @@ python -m venv .venv
 Assert-CommandSucceeded 'Creating the Python virtual environment'
 & "$ProjectRoot\.venv\Scripts\python.exe" -m pip install --upgrade pip
 Assert-CommandSucceeded 'Upgrading pip'
-& "$ProjectRoot\.venv\Scripts\python.exe" -m pip install -e '.[dev,yfinance]'
+& "$ProjectRoot\.venv\Scripts\python.exe" -m pip install -e '.[dev,yfinance,intraday]'
 Assert-CommandSucceeded 'Installing Python dependencies'
 Set-Location -LiteralPath "$ProjectRoot\frontend"
 Invoke-ProjectPnpm -PnpmArguments @('install', '--frozen-lockfile')

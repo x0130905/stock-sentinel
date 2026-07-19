@@ -43,6 +43,10 @@ class AppConfig:
         return self.raw.get("backtest", {})
 
     @property
+    def intraday(self) -> dict[str, Any]:
+        return self.raw.get("intraday", {})
+
+    @property
     def history_period(self) -> str:
         return str(self.raw.get("history_period", "2y"))
 
@@ -96,3 +100,14 @@ def validate_config(raw: dict[str, Any]) -> None:
     confirmation_runs = int(raw.get("alerts", {}).get("score_confirmation_runs", 1))
     if not 1 <= confirmation_runs <= 5:
         raise ConfigError("score_confirmation_runs 必须在 1 到 5 之间")
+    intraday = raw.get("intraday", {})
+    interval = int(intraday.get("interval_minutes", 15))
+    if interval not in {5, 15, 30, 60}:
+        raise ConfigError("intraday.interval_minutes 必须是 5、15、30 或 60")
+    for key in (
+        "abnormal_drop_percent",
+        "pullback_from_high_percent",
+        "support_break_percent",
+    ):
+        if float(intraday.get(key, 0)) < 0:
+            raise ConfigError(f"intraday.{key} 不能为负数")

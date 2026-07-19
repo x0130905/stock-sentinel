@@ -109,9 +109,44 @@ export type Backtests = {
   disclaimer: string
 }
 
+export type IntradayQuote = {
+  symbol: string
+  name: string
+  price: number
+  previous_close: number
+  open: number
+  high: number
+  low: number
+  change_percent: number
+  volume: number
+  amount: number
+  updated_at: string
+  provider: string
+  experimental: boolean
+  delay_note: string
+}
+
+export type IntradaySnapshot = {
+  schema_version: number
+  generated_at: string | null
+  provider: string
+  experimental: boolean
+  status: string
+  market_open_check: boolean
+  interval_minutes: number
+  successful_count: number
+  monitored_count: number
+  new_risk_count: number
+  quotes: IntradayQuote[]
+  errors: { symbol: string; message: string }[]
+  delay_note: string
+  disclaimer: string
+}
+
 export type AppData = {
   dashboard: Dashboard
   alerts: AlertRecord[]
   backtests: Backtests
+  intraday: IntradaySnapshot
   cached: boolean
 }

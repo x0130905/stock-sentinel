@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Badge, SectionTitle } from '../components/Common'
 import type { Dashboard } from '../types'
 
-const CURRENT_SCHEMA_VERSION = 2
+const CURRENT_SCHEMA_VERSION = 3
 
 type EditableStock = {
   symbol: string
@@ -44,6 +44,15 @@ type LocalConfig = {
     simulation_mode: boolean
     live_alerts_enabled: boolean
     backtest_required: boolean
+  }
+  intraday: {
+    enabled: boolean
+    provider: string
+    interval_minutes: number
+    abnormal_drop_percent: number
+    pullback_from_high_percent: number
+    support_break_percent: number
+    cooldown_minutes: number
   }
   backtest: {
     initial_cash: number
@@ -93,6 +102,15 @@ function defaultConfig(dashboard: Dashboard): LocalConfig {
       simulation_mode: true,
       live_alerts_enabled: false,
       backtest_required: true,
+    },
+    intraday: {
+      enabled: true,
+      provider: 'akshare',
+      interval_minutes: 15,
+      abnormal_drop_percent: 3,
+      pullback_from_high_percent: 2,
+      support_break_percent: 0.5,
+      cooldown_minutes: 60,
     },
     backtest: {
       initial_cash: 100000,
@@ -208,6 +226,43 @@ export function Settings({ dashboard }: { dashboard: Dashboard }) {
           此页修改先保存在当前设备。要让 GitHub Actions 后台使用，请导出 settings.json
           并替换仓库的 config/settings.json。密钥只能放 GitHub Secrets。
         </p>
+      </section>
+
+      <section className="panel settings-section">
+        <SectionTitle title="免费盘中风险观察" />
+        <div className="settings-grid">
+          <label>
+            检查频率（分钟）
+            <select
+              value={config.intraday.interval_minutes}
+              onChange={(event) => setConfig({
+                ...config,
+                intraday: { ...config.intraday, interval_minutes: Number(event.target.value) },
+              })}
+            >
+              <option value="5">5 分钟</option>
+              <option value="15">15 分钟</option>
+              <option value="30">30 分钟</option>
+              <option value="60">60 分钟</option>
+            </select>
+          </label>
+          <label>
+            异常下跌阈值（%）
+            <input type="number" min="0" step="0.1" value={config.intraday.abnormal_drop_percent} onChange={(event) => setConfig({ ...config, intraday: { ...config.intraday, abnormal_drop_percent: Number(event.target.value) } })} />
+          </label>
+          <label>
+            从盘中高点回落（%）
+            <input type="number" min="0" step="0.1" value={config.intraday.pullback_from_high_percent} onChange={(event) => setConfig({ ...config, intraday: { ...config.intraday, pullback_from_high_percent: Number(event.target.value) } })} />
+          </label>
+          <label>
+            跌破支撑缓冲（%）
+            <input type="number" min="0" step="0.1" value={config.intraday.support_break_percent} onChange={(event) => setConfig({ ...config, intraday: { ...config.intraday, support_break_percent: Number(event.target.value) } })} />
+          </label>
+        </div>
+        <div className="switch-row">
+          <label><input type="checkbox" checked={config.intraday.enabled} onChange={(event) => setConfig({ ...config, intraday: { ...config.intraday, enabled: event.target.checked } })} /> 启用实验性盘中观察</label>
+          <Badge tone="warning">AKShare 免费来源，不替代券商条件单</Badge>
+        </div>
       </section>
 
       <section className="panel settings-section">

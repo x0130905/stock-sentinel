@@ -187,8 +187,8 @@ def run_monitor(config: AppConfig, logger: logging.Logger, force: bool = False) 
     stocks_payload = [result.to_dict() for result in results]
     if config.frequency_minutes >= 1440:
         schedule_note = (
-            "交易日收盘后每日分析一次；Alpha Vantage 免费层为日线数据，"
-            "GitHub Actions 可能延迟，不是实时行情。"
+            "交易时段每15分钟进行一次实验性风险观察，收盘后每日进行一次完整分析；"
+            "免费来源和 GitHub Actions 均可能延迟，不是可靠实时行情。"
         )
     else:
         schedule_note = (

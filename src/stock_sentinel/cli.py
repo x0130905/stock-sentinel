@@ -5,6 +5,7 @@ import json
 import sys
 
 from .config import PROJECT_ROOT, ConfigError, load_config
+from .intraday import run_intraday_risk_check
 from .logging_config import configure_logging
 from .notifier import EmailNotifier, NotificationError
 from .providers import create_provider
@@ -19,6 +20,8 @@ def build_parser() -> argparse.ArgumentParser:
     commands = parser.add_subparsers(dest="command", required=True)
     monitor = commands.add_parser("monitor", help="抓取行情并生成分析和提醒")
     monitor.add_argument("--force", action="store_true", help="忽略交易时段限制（本地测试用）")
+    intraday = commands.add_parser("intraday-risk", help="使用免费辅助行情执行盘中风险检查")
+    intraday.add_argument("--force", action="store_true", help="忽略交易时段限制（本地测试用）")
     commands.add_parser("backtest", help="对配置中的全部股票执行历史回测")
     commands.add_parser("test-email", help="发送一封测试邮件")
     commands.add_parser("notify-failure", help="发送自动任务失败通知")
@@ -59,6 +62,16 @@ def main(argv: list[str] | None = None) -> int:
             config.raw["provider"] = "sample"
             dashboard = run_monitor(config, logger, force=True)
             print(f"演示数据已生成：{dashboard['summary']['successful_count']} 只股票")
+            return 0
+        if args.command == "intraday-risk":
+            payload = run_intraday_risk_check(config, logger, force=args.force)
+            if payload.get("status") == "skipped":
+                print("当前不在国内交易时段，已跳过免费盘中快照请求")
+                return 0
+            print(
+                f"盘中检查完成：成功 {payload['successful_count']}/"
+                f"{payload['monitored_count']}，新增风险 {payload['new_risk_count']}"
+            )
             return 0
         dashboard = run_monitor(config, logger, force=args.force)
         if dashboard.get("status") == "skipped":
