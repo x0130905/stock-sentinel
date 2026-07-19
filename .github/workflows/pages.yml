@@ -8,7 +8,7 @@ on:
       - 'data/**'
       - '.github/workflows/pages.yml'
   workflow_run:
-    workflows: ['行情监测', '盘中风险检查']
+    workflows: ['行情监测', 'Intraday Risk Check']
     types: [completed]
     branches: [main]
   workflow_dispatch:
