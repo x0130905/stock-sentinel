@@ -24,6 +24,30 @@ def _event(
     )
 
 
+def _confirmed_score_signal(
+    symbol_state: dict[str, Any],
+    side: str,
+    score: int,
+    threshold: int,
+    confirmation_runs: int,
+) -> bool:
+    streak_key = f"{side}_threshold_streak"
+    confirmed_key = f"{side}_confirmed"
+    above_threshold = score >= threshold
+
+    if not above_threshold:
+        symbol_state[streak_key] = 0
+        symbol_state[confirmed_key] = False
+        return False
+
+    streak = int(symbol_state.get(streak_key, 0)) + 1
+    symbol_state[streak_key] = streak
+    if streak >= confirmation_runs and not bool(symbol_state.get(confirmed_key, False)):
+        symbol_state[confirmed_key] = True
+        return True
+    return False
+
+
 def build_alerts(
     result: AnalysisResult,
     stock: StockConfig,
@@ -32,16 +56,22 @@ def build_alerts(
     state: dict[str, Any],
 ) -> list[AlertEvent]:
     symbol_state = state.setdefault("symbols", {}).setdefault(result.symbol, {})
-    previous_buy = int(symbol_state.get("buy_score", 0))
-    previous_sell = int(symbol_state.get("sell_score", 0))
     buy_threshold = int(scoring.get("buy_alert_threshold", 65))
     sell_threshold = int(scoring.get("sell_alert_threshold", 65))
+    confirmation_runs = max(1, int(alert_settings.get("score_confirmation_runs", 1)))
     candidates: list[AlertEvent] = []
 
-    if stock.buy_alert_enabled and previous_buy < buy_threshold <= result.buy_score:
+    buy_confirmed = _confirmed_score_signal(
+        symbol_state, "buy", result.buy_score, buy_threshold, confirmation_runs
+    )
+    sell_confirmed = _confirmed_score_signal(
+        symbol_state, "sell", result.sell_score, sell_threshold, confirmation_runs
+    )
+
+    if stock.buy_alert_enabled and buy_confirmed:
         reasons = "；".join(item.label for item in result.buy_criteria if item.triggered)
         candidates.append(_event(result, "buy_score", "可能适合买入", reasons, result.buy_score))
-    if stock.sell_alert_enabled and previous_sell < sell_threshold <= result.sell_score:
+    if stock.sell_alert_enabled and sell_confirmed:
         reasons = "；".join(item.label for item in result.sell_criteria if item.triggered)
         candidates.append(_event(result, "sell_score", "可能适合卖出", reasons, result.sell_score))
     if stock.take_profit_price and result.price >= stock.take_profit_price:

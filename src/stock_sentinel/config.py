@@ -93,3 +93,6 @@ def validate_config(raw: dict[str, Any]) -> None:
         value = int(scoring.get(key, 65))
         if not 0 <= value <= 100:
             raise ConfigError(f"{key} 必须在 0 到 100 之间")
+    confirmation_runs = int(raw.get("alerts", {}).get("score_confirmation_runs", 1))
+    if not 1 <= confirmation_runs <= 5:
+        raise ConfigError("score_confirmation_runs 必须在 1 到 5 之间")

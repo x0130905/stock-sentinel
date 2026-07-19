@@ -39,7 +39,11 @@ def run_backtests_for_data(
             results[stock.symbol] = run_backtest(data.frame, stock, config.scoring, config.backtest)
         except Exception as exc:
             logger.exception("%s 回测失败", stock.symbol)
-            results[stock.symbol] = {"status": "failed", "symbol": stock.symbol, "error": str(exc)}
+            results[stock.symbol] = {
+                "status": "failed",
+                "symbol": stock.symbol,
+                "error": str(exc),
+            }
     payload = {
         "generated_at": datetime.now(UTC).isoformat(),
         "results": results,
@@ -53,10 +57,20 @@ def _backtest_ready(backtests: dict[str, Any], symbol: str) -> bool:
     return backtests.get("results", {}).get(symbol, {}).get("status") == "completed"
 
 
+def _alert_local_date(item: dict[str, Any], timezone: ZoneInfo) -> str | None:
+    try:
+        created_at = datetime.fromisoformat(str(item.get("created_at", "")))
+    except ValueError:
+        return None
+    if created_at.tzinfo is None:
+        created_at = created_at.replace(tzinfo=UTC)
+    return created_at.astimezone(timezone).date().isoformat()
+
+
 def run_monitor(config: AppConfig, logger: logging.Logger, force: bool = False) -> dict[str, Any]:
     markets = {stock.market for stock in config.stocks}
     if not force and config.provider != "sample" and not should_run_for_markets(markets):
-        logger.info("当前不在重点交易时段，跳过行情请求以节省免费额度")
+        logger.info("当前不在收盘分析窗口，跳过行情请求以节省免费额度")
         return {"status": "skipped", "reason": "outside_market_window"}
 
     provider = create_provider(config.provider)
@@ -64,6 +78,8 @@ def run_monitor(config: AppConfig, logger: logging.Logger, force: bool = False) 
     state = load_json(state_path, {"symbols": {}, "last_alerts": {}, "failures": {}})
     history = load_json(DATA_DIR / "alerts.json", {"alerts": []})
     market_data: dict[str, Any] = {}
+    market_dates: dict[str, str] = {}
+    fresh_symbols: set[str] = set()
     results: list[AnalysisResult] = []
     errors: list[dict[str, str]] = []
     notifier = EmailNotifier()
@@ -73,12 +89,20 @@ def run_monitor(config: AppConfig, logger: logging.Logger, force: bool = False) 
         try:
             data = provider.fetch(stock.symbol, config.history_period)
             result = analyze_market_data(data, stock, config.scoring)
+            market_date = data.frame.index[-1].date().isoformat()
+            previous_market_date = (
+                state.setdefault("symbols", {}).get(stock.symbol, {}).get("market_data_date")
+            )
+            if market_date != previous_market_date:
+                fresh_symbols.add(stock.symbol)
+            market_dates[stock.symbol] = market_date
             market_data[stock.symbol] = data
             results.append(result)
             state.setdefault("failures", {})[stock.symbol] = 0
             logger.info(
-                "%s 分析完成：价格 %.2f，买入评分 %d，卖出评分 %d",
+                "%s 分析完成：数据日期 %s，价格 %.3f，买入评分 %d，卖出评分 %d",
                 stock.symbol,
+                market_date,
                 result.price,
                 result.buy_score,
                 result.sell_score,
@@ -108,6 +132,9 @@ def run_monitor(config: AppConfig, logger: logging.Logger, force: bool = False) 
     new_events = []
     for result in results:
         stock = stock_lookup[result.symbol]
+        if result.symbol not in fresh_symbols:
+            logger.info("%s 数据日期未变化，本次只刷新页面，不重复累计或发送信号", result.symbol)
+            continue
         if config.alerts.get("backtest_required", True) and not _backtest_ready(
             backtests, result.symbol
         ):
@@ -128,15 +155,20 @@ def run_monitor(config: AppConfig, logger: logging.Logger, force: bool = False) 
             history.setdefault("alerts", []).insert(0, event.to_dict())
             new_events.append(event)
 
+    for symbol, market_date in market_dates.items():
+        state.setdefault("symbols", {}).setdefault(symbol, {})["market_data_date"] = market_date
+
     history["alerts"] = history.get("alerts", [])[:500]
     _write_shared("alerts.json", history)
 
     now_utc = datetime.now(UTC)
-    now_new_york = now_utc.astimezone(NEW_YORK)
-    summary_date = now_new_york.date().isoformat()
+    summary_timezone = SHANGHAI if markets.intersection({"CN", "HK"}) else NEW_YORK
+    summary_local = now_utc.astimezone(summary_timezone)
+    summary_date = summary_local.date().isoformat()
+    summary_close_hour = 15 if summary_timezone == SHANGHAI else 16
     if (
-        now_new_york.weekday() < 5
-        and now_new_york.hour >= 16
+        summary_local.weekday() < 5
+        and summary_local.hour >= summary_close_hour
         and state.get("last_summary_date") != summary_date
         and any(stock.daily_summary_enabled for stock in config.stocks)
     ):
@@ -147,22 +179,30 @@ def run_monitor(config: AppConfig, logger: logging.Logger, force: bool = False) 
             logger.exception("每日总结邮件发送失败")
 
     generated_at = now_utc.isoformat()
-    today = now_utc.date().isoformat()
     today_signals = sum(
-        1 for item in history["alerts"] if str(item.get("created_at", "")).startswith(today)
+        1
+        for item in history["alerts"]
+        if _alert_local_date(item, summary_timezone) == summary_date
     )
     stocks_payload = [result.to_dict() for result in results]
+    if config.frequency_minutes >= 1440:
+        schedule_note = (
+            "交易日收盘后每日分析一次；Alpha Vantage 免费层为日线数据，"
+            "GitHub Actions 可能延迟，不是实时行情。"
+        )
+    else:
+        schedule_note = (
+            f"配置频率为每 {config.frequency_minutes} 分钟；GitHub Actions 定时可能延迟，"
+            "这不是交易所级实时监控。"
+        )
     dashboard = {
-        "schema_version": 1,
+        "schema_version": 2,
         "generated_at": generated_at,
         "generated_at_local": now_utc.astimezone(SHANGHAI).isoformat(),
         "provider": config.provider,
         "mode": "sample" if config.provider == "sample" else "live",
         "provider_status": "正常" if not errors else ("部分失败" if results else "失败"),
-        "schedule_note": (
-            f"配置频率为每 {config.frequency_minutes} 分钟；GitHub Actions 定时可能延迟，"
-            "这不是交易所级实时监控。"
-        ),
+        "schedule_note": schedule_note,
         "summary": {
             "monitored_count": len(config.stocks),
             "successful_count": len(results),
