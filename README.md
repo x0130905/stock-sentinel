@@ -74,9 +74,8 @@ python -m venv .venv
 .\.venv\Scripts\python -m pip install -e ".[dev,yfinance]"
 .\.venv\Scripts\python -m stock_sentinel demo
 cd frontend
-corepack enable
-pnpm install --frozen-lockfile
-pnpm dev
+npx --yes pnpm@10.15.1 install --frozen-lockfile
+npx --yes pnpm@10.15.1 dev
 ```
 
 ## 命令一览
@@ -98,8 +97,8 @@ pnpm dev
 .\.venv\Scripts\python -m pytest
 .\.venv\Scripts\python -m ruff check src tests
 cd frontend
-pnpm test
-pnpm build
+npx --yes pnpm@10.15.1 test
+npx --yes pnpm@10.15.1 build
 ```
 
 ## 配置股票和评分
