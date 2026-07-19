@@ -60,3 +60,22 @@ def test_daily_series_is_normalized(monkeypatch: pytest.MonkeyPatch) -> None:
     assert data.frame.index.is_monotonic_increasing
     assert data.frame.iloc[-1]["close"] == pytest.approx(4.74)
     assert data.delayed is True
+
+
+def test_provider_spaces_sequential_requests(monkeypatch: pytest.MonkeyPatch) -> None:
+    monotonic_values = iter([100.0, 105.0])
+    waits: list[float] = []
+    provider = AlphaVantageProvider()
+
+    monkeypatch.setattr(
+        "stock_sentinel.providers.alpha_vantage.time.monotonic",
+        lambda: next(monotonic_values),
+    )
+    monkeypatch.setattr(
+        "stock_sentinel.providers.alpha_vantage.time.sleep", waits.append
+    )
+
+    provider._wait_for_rate_limit()
+    provider._wait_for_rate_limit()
+
+    assert waits == [pytest.approx(8.0)]

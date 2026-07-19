@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import time
 
 import httpx
 import pandas as pd
@@ -18,6 +19,20 @@ class _TransientAlphaVantageError(ProviderError):
 
 class AlphaVantageProvider(MarketDataProvider):
     name = "alpha_vantage"
+    minimum_request_interval_seconds = 13.0
+
+    def __init__(self) -> None:
+        self._last_request_at: float | None = None
+
+    def _wait_for_rate_limit(self) -> None:
+        now = time.monotonic()
+        wait_seconds = 0.0
+        if self._last_request_at is not None:
+            elapsed = now - self._last_request_at
+            wait_seconds = max(0.0, self.minimum_request_interval_seconds - elapsed)
+        if wait_seconds:
+            time.sleep(wait_seconds)
+        self._last_request_at = now + wait_seconds
 
     @retry(
         retry=retry_if_exception_type(_TransientAlphaVantageError),
@@ -29,6 +44,7 @@ class AlphaVantageProvider(MarketDataProvider):
         api_key = os.getenv("ALPHA_VANTAGE_API_KEY")
         if not api_key:
             raise ProviderError("未设置 ALPHA_VANTAGE_API_KEY")
+        self._wait_for_rate_limit()
         try:
             response = httpx.get(
                 "https://www.alphavantage.co/query",
