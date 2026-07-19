@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "provider": "alpha_vantage",
   "history_period": "6mo",
   "analysis_frequency_minutes": 1440,
@@ -98,6 +98,15 @@
     "simulation_mode": true,
     "live_alerts_enabled": false,
     "backtest_required": true
+  },
+  "intraday": {
+    "enabled": true,
+    "provider": "akshare",
+    "interval_minutes": 15,
+    "abnormal_drop_percent": 3.0,
+    "pullback_from_high_percent": 2.0,
+    "support_break_percent": 0.5,
+    "cooldown_minutes": 60
   },
   "backtest": {
     "initial_cash": 100000,

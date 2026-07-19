@@ -56,3 +56,16 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
   .mobile-nav { position: fixed; z-index: 30; left: 10px; right: 10px; bottom: max(10px, env(safe-area-inset-bottom)); height: 66px; display: grid; grid-template-columns: repeat(6, 1fr); padding: 6px; border: 1px solid rgba(151,177,207,.17); border-radius: 17px; background: rgba(8,20,35,.93); backdrop-filter: blur(20px); box-shadow: 0 18px 50px #000; }.mobile-nav button { position: relative; display: grid; place-items: center; align-content: center; gap: 2px; border: 0; border-radius: 11px; color: var(--muted); background: transparent; font-size: 9px; }.mobile-nav button > span { font-size: 17px; line-height: 1; }.mobile-nav button.active { color: white; background: rgba(92,168,255,.11); }.mobile-nav button i { top: 1px; right: 4px; }
 }
 @media (max-width: 410px) { .stats-grid, .simulator-stats { grid-template-columns: 1fr; }.detail-scores { flex-wrap: wrap; }.signal-summary { width: 100%; padding: 12px 0 0; border-left: 0; border-top: 1px solid var(--line); }.settings-grid, .compact-grid, .add-stock { grid-template-columns: 1fr; }.mobile-nav { left: 5px; right: 5px; }.mobile-nav button { font-size: 8px; } }
+
+.intraday-panel { padding: 0 22px 22px; }
+.intraday-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 18px; }
+.intraday-card { padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: rgba(8,21,37,.72); }
+.intraday-card > div { display: grid; gap: 3px; }
+.intraday-card small, .intraday-card p, .intraday-foot, .intraday-empty { color: var(--muted); font-size: 10px; }
+.intraday-card > span { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-top: 13px; }
+.intraday-card > span b { font-size: 18px; }
+.intraday-card p { margin: 9px 0 0; }
+.intraday-foot { display: flex; justify-content: space-between; margin-top: 15px; }
+.intraday-warning { margin: 14px 0 0; padding: 11px 13px; border-radius: 10px; background: rgba(255,204,102,.07); color: var(--gold); font-size: 10px; line-height: 1.6; }
+@media (max-width: 1050px) { .intraday-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 650px) { .intraday-grid { grid-template-columns: 1fr; }.intraday-panel { padding: 0 14px 16px; } }

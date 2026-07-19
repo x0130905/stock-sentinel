@@ -20,6 +20,7 @@ dependencies = [
 
 [project.optional-dependencies]
 yfinance = ["yfinance>=0.2.54,<2"]
+intraday = ["akshare>=1.17,<2"]
 dev = [
   "pytest>=8,<9",
   "pytest-cov>=5,<7",

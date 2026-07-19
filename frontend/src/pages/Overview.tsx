@@ -1,8 +1,8 @@
 import { Change, Badge, ScoreGauge, SectionTitle, StatCard } from '../components/Common'
-import type { Dashboard, StockAnalysis } from '../types'
+import type { Dashboard, IntradaySnapshot, StockAnalysis } from '../types'
 import { formatTime } from '../utils'
 
-export function Overview({ dashboard, onSelect }: { dashboard: Dashboard; onSelect: (stock: StockAnalysis) => void }) {
+export function Overview({ dashboard, intraday, onSelect }: { dashboard: Dashboard; intraday: IntradaySnapshot; onSelect: (stock: StockAnalysis) => void }) {
   const lead = dashboard.stocks[0]
   return (
     <div className="page-stack">
@@ -38,6 +38,26 @@ export function Overview({ dashboard, onSelect }: { dashboard: Dashboard; onSele
             <div className="card-footer"><span>{stock.signal_label}</span><span>可信度 {stock.confidence} →</span></div>
           </button>)}
         </div>
+      </section>
+
+      <section className="panel intraday-panel">
+        <SectionTitle
+          eyebrow="INTRADAY RISK"
+          title="15分钟盘中风险观察"
+          action={<Badge tone={intraday.status === '正常' ? 'success' : 'warning'}>{intraday.status}</Badge>}
+        />
+        {intraday.quotes.length ? <div className="intraday-grid">
+          {intraday.quotes.map((quote) => <article className="intraday-card" key={quote.symbol}>
+            <div><strong>{quote.symbol}</strong><small>{quote.name}</small></div>
+            <span><b>¥{quote.price.toFixed(3)}</b><Change value={quote.change_percent} /></span>
+            <p>今高 ¥{quote.high.toFixed(3)} · 今低 ¥{quote.low.toFixed(3)}</p>
+          </article>)}
+        </div> : <p className="intraday-empty">等待交易时段首次检查；工作日 9:30–11:30、13:00–15:00 运行。</p>}
+        <div className="intraday-foot">
+          <span>最近检查：{intraday.generated_at ? formatTime(intraday.generated_at) : '尚未运行'}</span>
+          <span>本轮新增风险：{intraday.new_risk_count}</span>
+        </div>
+        <p className="intraday-warning">实验性免费行情：{intraday.delay_note} 必须执行的止损请使用券商条件单。</p>
       </section>
 
       <section className="notice-strip"><div>i</div><p><strong>真实频率说明</strong>{dashboard.schedule_note}</p></section>

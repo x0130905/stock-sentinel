@@ -11,6 +11,7 @@ import httpx
 
 from . import DISCLAIMER
 from .models import AlertEvent, AnalysisResult
+from .providers.akshare_intraday import IntradayQuote
 
 
 class NotificationError(RuntimeError):
@@ -120,6 +121,21 @@ class EmailNotifier:
         </div>
         """
         return self.send("[Stock Sentinel] 每日收盘总结", body)
+
+    def send_intraday_event(self, event: AlertEvent, quote: IntradayQuote) -> bool:
+        body = f"""
+        <div style="font-family:system-ui;max-width:620px;margin:auto;color:#172033">
+          <h2>{html.escape(event.label)} · {html.escape(event.name)} ({event.symbol})</h2>
+          <p>盘中参考价：<b>{quote.price:.3f}</b>　涨跌：{quote.change_percent:+.2f}%</p>
+          <p>触发原因：{html.escape(event.reason)}</p>
+          <p>{html.escape(quote.delay_note)}</p>
+          <p><a href="{html.escape(self.site_url)}">打开手机端系统</a></p>
+          <hr><p><b>{html.escape(DISCLAIMER)}</b></p>
+        </div>
+        """
+        sent = self.send(f"[Stock Sentinel] [实验性盘中] {event.label} - {event.symbol}", body)
+        event.sent = sent
+        return sent
 
     def send_test(self) -> bool:
         body = (

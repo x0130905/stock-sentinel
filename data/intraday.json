@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "generated_at": null,
+  "provider": "akshare",
+  "experimental": true,
+  "status": "等待首次盘中检查",
+  "market_open_check": true,
+  "interval_minutes": 15,
+  "successful_count": 0,
+  "monitored_count": 5,
+  "new_risk_count": 0,
+  "quotes": [],
+  "errors": [],
+  "delay_note": "AKShare 聚合公开网页行情，仅作实验性辅助，可能延迟、中断或发生字段变化。",
+  "disclaimer": "本系统仅用于信息监测和规则化分析，不构成投资建议或收益承诺。"
+}

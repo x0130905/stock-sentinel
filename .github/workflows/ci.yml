@@ -19,7 +19,7 @@ jobs:
           python-version: '3.12'
           cache: pip
       - name: 安装 Python 依赖
-        run: pip install -e '.[dev,yfinance]'
+        run: pip install -e '.[dev,yfinance,intraday]'
       - name: Python 代码检查
         run: ruff check src tests
       - name: Python 自动测试

@@ -62,10 +62,10 @@ export default function App() {
     <main className="main-content">
       {(data.cached || !online) && <div className="offline-banner">当前显示离线缓存，最后生成于 {formatTime(data.dashboard.generated_at)}。</div>}
       {error && <div className="offline-banner warning">刷新失败，继续显示上次数据：{error}</div>}
-      {tab === 'overview' && <Overview dashboard={data.dashboard} onSelect={selectStock} />}
+      {tab === 'overview' && <Overview dashboard={data.dashboard} intraday={data.intraday} onSelect={selectStock} />}
       {tab === 'watchlist' && <Watchlist stocks={data.dashboard.stocks} onSelect={selectStock} />}
       {tab === 'detail' && <Detail stock={selected} />}
-      {tab === 'alerts' && <Alerts alerts={data.alerts} stocks={data.dashboard.stocks} />}
+      {tab === 'alerts' && <Alerts alerts={data.alerts} stocks={data.dashboard.stocks} intraday={data.intraday} />}
       {tab === 'simulator' && <Simulator stocks={data.dashboard.stocks} backtests={data.backtests} />}
       {tab === 'settings' && <Settings dashboard={data.dashboard} />}
     </main>
