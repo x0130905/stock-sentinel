@@ -1,6 +1,45 @@
 {
   "alerts": [
     {
+      "id": "b1167abe-40ce-41a1-9069-a384b4cb9da0",
+      "symbol": "159915.SHZ",
+      "name": "创业板ETF易方达",
+      "alert_type": "intraday_pullback",
+      "label": "盘中从高点明显回落",
+      "reason": "当前价较盘中高点 3.572 回落 -3.22%",
+      "price": 3.457,
+      "score": null,
+      "created_at": "2026-07-20T05:21:49.313345+00:00",
+      "sent": false,
+      "simulated": true
+    },
+    {
+      "id": "f4b83350-71c6-43c7-9807-3bef96d42501",
+      "symbol": "510500.SHH",
+      "name": "中证500ETF南方",
+      "alert_type": "intraday_pullback",
+      "label": "盘中从高点明显回落",
+      "reason": "当前价较盘中高点 7.640 回落 -2.96%",
+      "price": 7.414,
+      "score": null,
+      "created_at": "2026-07-20T05:21:49.312975+00:00",
+      "sent": false,
+      "simulated": true
+    },
+    {
+      "id": "24be1654-e650-4277-bf4c-c18ba01dccd7",
+      "symbol": "510500.SHH",
+      "name": "中证500ETF南方",
+      "alert_type": "intraday_support_break",
+      "label": "盘中跌破日线支撑参考位",
+      "reason": "当前价 7.414，日线支撑 7.485，缓冲 0.5%",
+      "price": 7.414,
+      "score": null,
+      "created_at": "2026-07-20T05:21:49.312939+00:00",
+      "sent": false,
+      "simulated": true
+    },
+    {
       "id": "dfd5d85b-be31-4d09-b76d-1fe08f39e287",
       "symbol": "NVDA",
       "name": "NVIDIA",
