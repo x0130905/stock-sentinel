@@ -2,10 +2,19 @@ import { Badge, EmptyState, SectionTitle } from '../components/Common'
 import type { AlertRecord, IntradaySnapshot, StockAnalysis } from '../types'
 import { formatPercent, formatTime } from '../utils'
 
-export function Alerts({ alerts, stocks, intraday }: { alerts: AlertRecord[]; stocks: StockAnalysis[]; intraday: IntradaySnapshot }) {
+type AlertsProps = {
+  alerts: AlertRecord[]
+  stocks: StockAnalysis[]
+  intraday: IntradaySnapshot
+  unreadCount: number
+  onMarkAllRead: () => void
+}
+
+export function Alerts({ alerts, stocks, intraday, unreadCount, onMarkAllRead }: AlertsProps) {
   const lookup = new Map(stocks.map((stock) => [stock.symbol, stock]))
   const intradayLookup = new Map(intraday.quotes.map((quote) => [quote.symbol, quote]))
-  return <div className="page-stack"><SectionTitle eyebrow="HISTORY" title="历史提醒" action={<Badge>{alerts.length} 条</Badge>} />
+  return <div className="page-stack">
+    <SectionTitle eyebrow="HISTORY" title="历史提醒" action={<div className="alerts-actions"><Badge>{unreadCount > 0 ? `${unreadCount} 条未读` : '全部已读'}</Badge><button className="text-button" onClick={onMarkAllRead}>全部标为已读</button></div>} />
     {!alerts.length ? <EmptyState title="暂无提醒" text="评分首次越过阈值，或止盈、止损、异常涨跌触发后，会显示在这里。" /> : <div className="timeline panel">{alerts.map((alert) => {
       const stock = lookup.get(alert.symbol)
       const current = intradayLookup.get(alert.symbol)?.price ?? stock?.price

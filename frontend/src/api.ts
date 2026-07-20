@@ -2,8 +2,18 @@ import type { AlertRecord, AppData, Backtests, Dashboard, IntradaySnapshot } fro
 
 const CACHE_KEY = 'stock-sentinel-data-v1'
 
+export function readCachedAppData(): AppData | null {
+  try {
+    const cached = localStorage.getItem(CACHE_KEY)
+    return cached ? { ...(JSON.parse(cached) as AppData), cached: true } : null
+  } catch {
+    localStorage.removeItem(CACHE_KEY)
+    return null
+  }
+}
+
 async function fetchJson<T>(path: string): Promise<T> {
-  const response = await fetch(path, { cache: 'no-store' })
+  const response = await fetch(path, { cache: 'no-store', signal: AbortSignal.timeout(10_000) })
   if (!response.ok) throw new Error(`${path} 返回 HTTP ${response.status}`)
   return response.json() as Promise<T>
 }
@@ -26,8 +36,8 @@ export async function loadAppData(): Promise<AppData> {
     localStorage.setItem(CACHE_KEY, JSON.stringify(data))
     return data
   } catch (error) {
-    const cached = localStorage.getItem(CACHE_KEY)
-    if (cached) return { ...(JSON.parse(cached) as AppData), cached: true }
+    const cached = readCachedAppData()
+    if (cached) return cached
     throw error
   }
 }
