@@ -9,7 +9,7 @@
   "summary": {
     "monitored_count": 5,
     "successful_count": 5,
-    "today_signal_count": 3,
+    "today_signal_count": 0,
     "high_risk_count": 0,
     "latest_run": "2026-07-19T14:00:16.379102+00:00",
     "new_signal_count": 0
@@ -9926,6 +9926,6 @@
   "intraday_status": {
     "provider": "akshare",
     "experimental": true,
-    "latest_run": "2026-07-20T06:14:41.156541+00:00"
+    "latest_run": "2026-07-21T05:18:22.202950+00:00"
   }
 }
