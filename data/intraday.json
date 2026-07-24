@@ -1,35 +1,22 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-23T05:50:52.123315+00:00",
+  "generated_at": "2026-07-24T05:17:47.528671+00:00",
   "provider": "akshare",
   "experimental": true,
-  "status": "部分失败",
+  "status": "失败",
   "market_open_check": true,
   "interval_minutes": 15,
-  "successful_count": 1,
+  "successful_count": 0,
   "monitored_count": 5,
   "new_risk_count": 0,
-  "quotes": [
-    {
-      "symbol": "510500.SHH",
-      "name": "中证500ETF南方",
-      "price": 7.736,
-      "previous_close": 7.74,
-      "open": 7.741,
-      "high": 7.803,
-      "low": 7.661,
-      "change_percent": -0.05167958656331351,
-      "volume": 2016995.0,
-      "amount": 1560220030.0,
-      "updated_at": "2026-07-23T14:00:00+08:00",
-      "provider": "akshare",
-      "experimental": true,
-      "delay_note": "免费公开网页来源，可能延迟、中断或发生字段变化，不可作为可靠止损依据。"
-    }
-  ],
+  "quotes": [],
   "errors": [
     {
       "symbol": "510300.SHH",
+      "message": "AKShare 15分钟线失败: ConnectionError"
+    },
+    {
+      "symbol": "510500.SHH",
       "message": "AKShare 15分钟线失败: ConnectionError"
     },
     {
