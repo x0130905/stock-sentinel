@@ -64,8 +64,6 @@
     "518880.SHH": 0
   },
   "last_run": "2026-07-19T14:00:16.379102+00:00",
-  "last_intraday_run": "2026-07-24T05:17:47.528671+00:00",
-  "intraday_active": {
-    "159915.SHZ:intraday_pullback": true
-  }
+  "last_intraday_run": "2026-07-24T05:47:21.489650+00:00",
+  "intraday_active": {}
 }
