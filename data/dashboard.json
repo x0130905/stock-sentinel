@@ -9926,6 +9926,6 @@
   "intraday_status": {
     "provider": "akshare",
     "experimental": true,
-    "latest_run": "2026-08-03T06:18:32.491209+00:00"
+    "latest_run": "2026-08-04T05:44:00.060683+00:00"
   }
 }
