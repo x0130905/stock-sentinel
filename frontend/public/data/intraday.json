@@ -1,32 +1,15 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-06T05:45:18.956055+00:00",
+  "generated_at": "2026-08-07T06:16:42.398772+00:00",
   "provider": "akshare",
   "experimental": true,
-  "status": "部分失败",
+  "status": "失败",
   "market_open_check": true,
   "interval_minutes": 15,
-  "successful_count": 1,
+  "successful_count": 0,
   "monitored_count": 5,
   "new_risk_count": 0,
-  "quotes": [
-    {
-      "symbol": "512890.SHH",
-      "name": "红利低波ETF华泰柏瑞",
-      "price": 1.158,
-      "previous_close": 1.164,
-      "open": 1.163,
-      "high": 1.165,
-      "low": 1.151,
-      "change_percent": -0.5154639175257714,
-      "volume": 6198500.0,
-      "amount": 717026170.0,
-      "updated_at": "2026-08-06T14:00:00+08:00",
-      "provider": "akshare",
-      "experimental": true,
-      "delay_note": "免费公开网页来源，可能延迟、中断或发生字段变化，不可作为可靠止损依据。"
-    }
-  ],
+  "quotes": [],
   "errors": [
     {
       "symbol": "510300.SHH",
@@ -34,6 +17,10 @@
     },
     {
       "symbol": "510500.SHH",
+      "message": "AKShare 15分钟线失败: ConnectionError"
+    },
+    {
+      "symbol": "512890.SHH",
       "message": "AKShare 15分钟线失败: ConnectionError"
     },
     {
