@@ -5,20 +5,20 @@
       "buy_confirmed": false,
       "sell_threshold_streak": 0,
       "sell_confirmed": false,
-      "buy_score": 30,
+      "buy_score": 10,
       "sell_score": 0,
-      "price": 4.759,
-      "market_data_date": "2026-08-10"
+      "price": 4.728,
+      "market_data_date": "2026-08-11"
     },
     "510500.SHH": {
       "buy_threshold_streak": 0,
       "buy_confirmed": false,
       "sell_threshold_streak": 0,
       "sell_confirmed": false,
-      "buy_score": 30,
+      "buy_score": 10,
       "sell_score": 0,
-      "price": 8.037,
-      "market_data_date": "2026-08-10"
+      "price": 7.989,
+      "market_data_date": "2026-08-11"
     },
     "512890.SHH": {
       "buy_threshold_streak": 0,
@@ -26,9 +26,9 @@
       "sell_threshold_streak": 0,
       "sell_confirmed": false,
       "buy_score": 25,
-      "sell_score": 15,
-      "price": 1.162,
-      "market_data_date": "2026-08-10"
+      "sell_score": 0,
+      "price": 1.163,
+      "market_data_date": "2026-08-11"
     },
     "159915.SHZ": {
       "buy_threshold_streak": 0,
@@ -46,9 +46,9 @@
       "sell_threshold_streak": 0,
       "sell_confirmed": false,
       "buy_score": 35,
-      "sell_score": 10,
-      "price": 9.005,
-      "market_data_date": "2026-08-10"
+      "sell_score": 0,
+      "price": 9.009,
+      "market_data_date": "2026-08-11"
     }
   },
   "last_alerts": {
@@ -64,8 +64,8 @@
     "159915.SHZ": 0,
     "518880.SHH": 0
   },
-  "last_run": "2026-08-11T09:32:56.287000+00:00",
+  "last_run": "2026-08-12T09:42:41.413396+00:00",
   "last_intraday_run": "2026-08-12T06:40:25.684521+00:00",
   "intraday_active": {},
-  "last_summary_date": "2026-08-11"
+  "last_summary_date": "2026-08-12"
 }
