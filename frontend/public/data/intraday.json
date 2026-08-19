@@ -1,48 +1,15 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-18T06:41:10.465808+00:00",
+  "generated_at": "2026-08-19T02:43:16.807807+00:00",
   "provider": "akshare",
   "experimental": true,
-  "status": "部分失败",
+  "status": "失败",
   "market_open_check": true,
   "interval_minutes": 15,
-  "successful_count": 2,
+  "successful_count": 0,
   "monitored_count": 5,
   "new_risk_count": 0,
-  "quotes": [
-    {
-      "symbol": "159915.SHZ",
-      "name": "创业板ETF易方达",
-      "price": 3.727,
-      "previous_close": 3.756,
-      "open": 3.748,
-      "high": 3.767,
-      "low": 3.683,
-      "change_percent": -0.772097976570818,
-      "volume": 10992864.0,
-      "amount": 4090897826.0,
-      "updated_at": "2026-08-18T14:45:00+08:00",
-      "provider": "akshare",
-      "experimental": true,
-      "delay_note": "免费公开网页来源，可能延迟、中断或发生字段变化，不可作为可靠止损依据。"
-    },
-    {
-      "symbol": "518880.SHH",
-      "name": "黄金ETF华安",
-      "price": 9.076,
-      "previous_close": 9.068,
-      "open": 9.111,
-      "high": 9.126,
-      "low": 9.047,
-      "change_percent": 0.08822232024703336,
-      "volume": 3316461.0,
-      "amount": 3011117257.0,
-      "updated_at": "2026-08-18T14:45:00+08:00",
-      "provider": "akshare",
-      "experimental": true,
-      "delay_note": "免费公开网页来源，可能延迟、中断或发生字段变化，不可作为可靠止损依据。"
-    }
-  ],
+  "quotes": [],
   "errors": [
     {
       "symbol": "510300.SHH",
@@ -54,6 +21,14 @@
     },
     {
       "symbol": "512890.SHH",
+      "message": "AKShare 15分钟线失败: ConnectionError"
+    },
+    {
+      "symbol": "159915.SHZ",
+      "message": "AKShare 15分钟线失败: ConnectionError"
+    },
+    {
+      "symbol": "518880.SHH",
       "message": "AKShare 15分钟线失败: ConnectionError"
     }
   ],
