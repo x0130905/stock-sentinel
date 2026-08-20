@@ -9,7 +9,7 @@
   "summary": {
     "monitored_count": 5,
     "successful_count": 5,
-    "today_signal_count": 6,
+    "today_signal_count": 0,
     "high_risk_count": 1,
     "latest_run": "2026-08-19T09:05:56.759564+00:00",
     "new_signal_count": 0
@@ -9922,5 +9922,10 @@
     }
   ],
   "errors": [],
-  "disclaimer": "分析结果不构成投资建议，任何指标都无法保证盈利。"
+  "disclaimer": "分析结果不构成投资建议，任何指标都无法保证盈利。",
+  "intraday_status": {
+    "provider": "akshare",
+    "experimental": true,
+    "latest_run": "2026-08-20T02:42:04.127967+00:00"
+  }
 }
