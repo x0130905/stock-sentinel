@@ -1,51 +1,26 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-24T02:49:21.636448+00:00",
+  "generated_at": "2026-08-24T02:59:14.511350+00:00",
   "provider": "akshare",
   "experimental": true,
-  "status": "部分失败",
+  "status": "失败",
   "market_open_check": true,
   "interval_minutes": 15,
-  "successful_count": 2,
+  "successful_count": 0,
   "monitored_count": 5,
   "new_risk_count": 0,
-  "quotes": [
-    {
-      "symbol": "510500.SHH",
-      "name": "中证500ETF南方",
-      "price": 7.723,
-      "previous_close": 7.866,
-      "open": 7.859,
-      "high": 7.875,
-      "low": 7.717,
-      "change_percent": -1.8179506737859064,
-      "volume": 2132577.0,
-      "amount": 1661769453.0,
-      "updated_at": "2026-08-24T11:00:00+08:00",
-      "provider": "akshare",
-      "experimental": true,
-      "delay_note": "免费公开网页来源，可能延迟、中断或发生字段变化，不可作为可靠止损依据。"
-    },
-    {
-      "symbol": "512890.SHH",
-      "name": "红利低波ETF华泰柏瑞",
-      "price": 1.187,
-      "previous_close": 1.176,
-      "open": 1.172,
-      "high": 1.189,
-      "low": 1.171,
-      "change_percent": 0.9353741496598733,
-      "volume": 3914935.0,
-      "amount": 462675280.0,
-      "updated_at": "2026-08-24T11:00:00+08:00",
-      "provider": "akshare",
-      "experimental": true,
-      "delay_note": "免费公开网页来源，可能延迟、中断或发生字段变化，不可作为可靠止损依据。"
-    }
-  ],
+  "quotes": [],
   "errors": [
     {
       "symbol": "510300.SHH",
+      "message": "AKShare 15分钟线失败: ConnectionError"
+    },
+    {
+      "symbol": "510500.SHH",
+      "message": "AKShare 15分钟线失败: ConnectionError"
+    },
+    {
+      "symbol": "512890.SHH",
       "message": "AKShare 15分钟线失败: ConnectionError"
     },
     {
