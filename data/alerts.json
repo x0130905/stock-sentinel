@@ -1,6 +1,58 @@
 {
   "alerts": [
     {
+      "id": "4c352914-8de3-4123-99f1-474809c04600",
+      "symbol": "159915.SHZ",
+      "name": "创业板ETF易方达",
+      "alert_type": "intraday_abnormal_drop",
+      "label": "盘中异常下跌",
+      "reason": "相对昨收跌幅 -4.52%，阈值 -3.00%",
+      "price": 3.399,
+      "score": null,
+      "created_at": "2026-08-24T05:51:11.250146+00:00",
+      "sent": false,
+      "simulated": true
+    },
+    {
+      "id": "7350678b-b042-4714-a285-66f3e833a010",
+      "symbol": "159915.SHZ",
+      "name": "创业板ETF易方达",
+      "alert_type": "intraday_pullback",
+      "label": "盘中从高点明显回落",
+      "reason": "当前价较盘中高点 3.570 回落 -4.79%",
+      "price": 3.399,
+      "score": null,
+      "created_at": "2026-08-24T05:51:11.250137+00:00",
+      "sent": false,
+      "simulated": true
+    },
+    {
+      "id": "e47102fd-7839-4698-b96a-bd7f471e7e94",
+      "symbol": "510500.SHH",
+      "name": "中证500ETF南方",
+      "alert_type": "intraday_pullback",
+      "label": "盘中从高点明显回落",
+      "reason": "当前价较盘中高点 7.875 回落 -3.05%",
+      "price": 7.635,
+      "score": null,
+      "created_at": "2026-08-24T05:51:11.249986+00:00",
+      "sent": false,
+      "simulated": true
+    },
+    {
+      "id": "9a29d7de-20c2-435b-9077-52fdbd819870",
+      "symbol": "510300.SHH",
+      "name": "沪深300ETF华泰柏瑞",
+      "alert_type": "intraday_pullback",
+      "label": "盘中从高点明显回落",
+      "reason": "当前价较盘中高点 4.692 回落 -2.05%",
+      "price": 4.596,
+      "score": null,
+      "created_at": "2026-08-24T05:51:11.249657+00:00",
+      "sent": false,
+      "simulated": true
+    },
+    {
       "id": "6f2c9565-a9c8-4601-a521-3aa3d911d825",
       "symbol": "510500.SHH",
       "name": "中证500ETF南方",
