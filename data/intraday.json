@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-25T02:43:58.402202+00:00",
+  "generated_at": "2026-08-25T02:54:45.060472+00:00",
   "provider": "akshare",
   "experimental": true,
   "status": "部分失败",
@@ -11,33 +11,17 @@
   "new_risk_count": 0,
   "quotes": [
     {
-      "symbol": "510300.SHH",
-      "name": "沪深300ETF华泰柏瑞",
-      "price": 4.604,
-      "previous_close": 4.627,
-      "open": 4.601,
-      "high": 4.621,
-      "low": 4.587,
-      "change_percent": -0.49708234277068275,
-      "volume": 2263180.0,
-      "amount": 1041748055.0,
-      "updated_at": "2026-08-25T10:45:00+08:00",
-      "provider": "akshare",
-      "experimental": true,
-      "delay_note": "免费公开网页来源，可能延迟、中断或发生字段变化，不可作为可靠止损依据。"
-    },
-    {
       "symbol": "510500.SHH",
       "name": "中证500ETF南方",
-      "price": 7.642,
+      "price": 7.646,
       "previous_close": 7.74,
       "open": 7.663,
       "high": 7.729,
       "low": 7.594,
-      "change_percent": -1.2661498708010366,
-      "volume": 1834703.0,
-      "amount": 1404925599.0,
-      "updated_at": "2026-08-25T10:45:00+08:00",
+      "change_percent": -1.2144702842377342,
+      "volume": 1867678.0,
+      "amount": 1430128586.0,
+      "updated_at": "2026-08-25T11:00:00+08:00",
       "provider": "akshare",
       "experimental": true,
       "delay_note": "免费公开网页来源，可能延迟、中断或发生字段变化，不可作为可靠止损依据。"
@@ -51,9 +35,25 @@
       "high": 1.193,
       "low": 1.185,
       "change_percent": 0.1682085786375076,
-      "volume": 3756222.0,
-      "amount": 446582864.0,
-      "updated_at": "2026-08-25T10:45:00+08:00",
+      "volume": 3986103.0,
+      "amount": 473948774.0,
+      "updated_at": "2026-08-25T11:00:00+08:00",
+      "provider": "akshare",
+      "experimental": true,
+      "delay_note": "免费公开网页来源，可能延迟、中断或发生字段变化，不可作为可靠止损依据。"
+    },
+    {
+      "symbol": "518880.SHH",
+      "name": "黄金ETF华安",
+      "price": 9.508,
+      "previous_close": 9.564,
+      "open": 9.607,
+      "high": 9.62,
+      "low": 9.498,
+      "change_percent": -0.5855290673358549,
+      "volume": 5477572.0,
+      "amount": 5241548265.0,
+      "updated_at": "2026-08-25T11:00:00+08:00",
       "provider": "akshare",
       "experimental": true,
       "delay_note": "免费公开网页来源，可能延迟、中断或发生字段变化，不可作为可靠止损依据。"
@@ -61,11 +61,11 @@
   ],
   "errors": [
     {
-      "symbol": "159915.SHZ",
+      "symbol": "510300.SHH",
       "message": "AKShare 15分钟线失败: ConnectionError"
     },
     {
-      "symbol": "518880.SHH",
+      "symbol": "159915.SHZ",
       "message": "AKShare 15分钟线失败: ConnectionError"
     }
   ],
