@@ -1,32 +1,15 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-26T06:46:47.035955+00:00",
+  "generated_at": "2026-09-01T06:45:18.811445+00:00",
   "provider": "akshare",
   "experimental": true,
-  "status": "部分失败",
+  "status": "失败",
   "market_open_check": true,
   "interval_minutes": 15,
-  "successful_count": 1,
+  "successful_count": 0,
   "monitored_count": 5,
   "new_risk_count": 0,
-  "quotes": [
-    {
-      "symbol": "518880.SHH",
-      "name": "黄金ETF华安",
-      "price": 9.525,
-      "previous_close": 9.533,
-      "open": 9.539,
-      "high": 9.588,
-      "low": 9.498,
-      "change_percent": -0.08391901814748248,
-      "volume": 5351846.0,
-      "amount": 5106721373.0,
-      "updated_at": "2026-08-26T15:00:00+08:00",
-      "provider": "akshare",
-      "experimental": true,
-      "delay_note": "免费公开网页来源，可能延迟、中断或发生字段变化，不可作为可靠止损依据。"
-    }
-  ],
+  "quotes": [],
   "errors": [
     {
       "symbol": "510300.SHH",
@@ -42,6 +25,10 @@
     },
     {
       "symbol": "159915.SHZ",
+      "message": "AKShare 15分钟线失败: ConnectionError"
+    },
+    {
+      "symbol": "518880.SHH",
       "message": "AKShare 15分钟线失败: ConnectionError"
     }
   ],
