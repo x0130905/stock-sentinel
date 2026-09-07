@@ -1,47 +1,15 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-07T06:37:01.801974+00:00",
+  "generated_at": "2026-09-07T06:57:17.526704+00:00",
   "provider": "akshare",
   "experimental": true,
   "status": "部分失败",
   "market_open_check": true,
   "interval_minutes": 15,
-  "successful_count": 4,
+  "successful_count": 2,
   "monitored_count": 5,
   "new_risk_count": 0,
   "quotes": [
-    {
-      "symbol": "510500.SHH",
-      "name": "中证500ETF南方",
-      "price": 7.778,
-      "previous_close": 7.673,
-      "open": 7.704,
-      "high": 7.822,
-      "low": 7.7,
-      "change_percent": 1.368434771275906,
-      "volume": 5190790.0,
-      "amount": 4026584095.0,
-      "updated_at": "2026-09-07T14:45:00+08:00",
-      "provider": "akshare",
-      "experimental": true,
-      "delay_note": "免费公开网页来源，可能延迟、中断或发生字段变化，不可作为可靠止损依据。"
-    },
-    {
-      "symbol": "512890.SHH",
-      "name": "红利低波ETF华泰柏瑞",
-      "price": 1.196,
-      "previous_close": 1.207,
-      "open": 1.206,
-      "high": 1.209,
-      "low": 1.19,
-      "change_percent": -0.9113504556752416,
-      "volume": 5727050.0,
-      "amount": 685415097.0,
-      "updated_at": "2026-09-07T14:45:00+08:00",
-      "provider": "akshare",
-      "experimental": true,
-      "delay_note": "免费公开网页来源，可能延迟、中断或发生字段变化，不可作为可靠止损依据。"
-    },
     {
       "symbol": "159915.SHZ",
       "name": "创业板ETF易方达",
@@ -51,9 +19,9 @@
       "high": 3.427,
       "low": 3.335,
       "change_percent": 3.2980332829047,
-      "volume": 20568563.0,
-      "amount": 6947853795.0,
-      "updated_at": "2026-09-07T14:45:00+08:00",
+      "volume": 21876062.0,
+      "amount": 7394380765.0,
+      "updated_at": "2026-09-07T15:00:00+08:00",
       "provider": "akshare",
       "experimental": true,
       "delay_note": "免费公开网页来源，可能延迟、中断或发生字段变化，不可作为可靠止损依据。"
@@ -61,15 +29,15 @@
     {
       "symbol": "518880.SHH",
       "name": "黄金ETF华安",
-      "price": 9.027,
+      "price": 9.024,
       "previous_close": 9.164,
       "open": 9.021,
       "high": 9.076,
       "low": 9.009,
-      "change_percent": -1.4949803579223042,
-      "volume": 4566836.0,
-      "amount": 4132205032.0,
-      "updated_at": "2026-09-07T14:45:00+08:00",
+      "change_percent": -1.5277171540811985,
+      "volume": 4995538.0,
+      "amount": 4519299673.0,
+      "updated_at": "2026-09-07T15:00:00+08:00",
       "provider": "akshare",
       "experimental": true,
       "delay_note": "免费公开网页来源，可能延迟、中断或发生字段变化，不可作为可靠止损依据。"
@@ -78,6 +46,14 @@
   "errors": [
     {
       "symbol": "510300.SHH",
+      "message": "AKShare 15分钟线失败: ConnectionError"
+    },
+    {
+      "symbol": "510500.SHH",
+      "message": "AKShare 15分钟线失败: ConnectionError"
+    },
+    {
+      "symbol": "512890.SHH",
       "message": "AKShare 15分钟线失败: ConnectionError"
     }
   ],
