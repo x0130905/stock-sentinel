@@ -1,65 +1,28 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-08T06:31:15.401075+00:00",
+  "generated_at": "2026-09-08T06:52:31.502815+00:00",
   "provider": "akshare",
   "experimental": true,
-  "status": "部分失败",
+  "status": "失败",
   "market_open_check": true,
   "interval_minutes": 15,
-  "successful_count": 3,
+  "successful_count": 0,
   "monitored_count": 5,
   "new_risk_count": 0,
-  "quotes": [
+  "quotes": [],
+  "errors": [
     {
       "symbol": "510300.SHH",
-      "name": "沪深300ETF华泰柏瑞",
-      "price": 4.617,
-      "previous_close": 4.634,
-      "open": 4.638,
-      "high": 4.657,
-      "low": 4.61,
-      "change_percent": -0.366853690116542,
-      "volume": 5164352.0,
-      "amount": 2394525220.0,
-      "updated_at": "2026-09-08T14:45:00+08:00",
-      "provider": "akshare",
-      "experimental": true,
-      "delay_note": "免费公开网页来源，可能延迟、中断或发生字段变化，不可作为可靠止损依据。"
+      "message": "AKShare 15分钟线失败: ConnectionError"
     },
     {
       "symbol": "510500.SHH",
-      "name": "中证500ETF南方",
-      "price": 7.78,
-      "previous_close": 7.771,
-      "open": 7.78,
-      "high": 7.86,
-      "low": 7.752,
-      "change_percent": 0.11581521039762954,
-      "volume": 2373971.0,
-      "amount": 1853860561.0,
-      "updated_at": "2026-09-08T14:45:00+08:00",
-      "provider": "akshare",
-      "experimental": true,
-      "delay_note": "免费公开网页来源，可能延迟、中断或发生字段变化，不可作为可靠止损依据。"
+      "message": "AKShare 15分钟线失败: ConnectionError"
     },
     {
       "symbol": "512890.SHH",
-      "name": "红利低波ETF华泰柏瑞",
-      "price": 1.205,
-      "previous_close": 1.195,
-      "open": 1.195,
-      "high": 1.207,
-      "low": 1.194,
-      "change_percent": 0.8368200836819994,
-      "volume": 5508254.0,
-      "amount": 662480747.0,
-      "updated_at": "2026-09-08T14:45:00+08:00",
-      "provider": "akshare",
-      "experimental": true,
-      "delay_note": "免费公开网页来源，可能延迟、中断或发生字段变化，不可作为可靠止损依据。"
-    }
-  ],
-  "errors": [
+      "message": "AKShare 15分钟线失败: ConnectionError"
+    },
     {
       "symbol": "159915.SHZ",
       "message": "AKShare 15分钟线失败: ConnectionError"
