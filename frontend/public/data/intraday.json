@@ -1,81 +1,32 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-10T06:37:50.369655+00:00",
+  "generated_at": "2026-09-10T06:57:53.228121+00:00",
   "provider": "akshare",
   "experimental": true,
-  "status": "部分失败",
+  "status": "失败",
   "market_open_check": true,
   "interval_minutes": 15,
-  "successful_count": 4,
+  "successful_count": 0,
   "monitored_count": 5,
   "new_risk_count": 0,
-  "quotes": [
+  "quotes": [],
+  "errors": [
     {
       "symbol": "510300.SHH",
-      "name": "沪深300ETF华泰柏瑞",
-      "price": 4.624,
-      "previous_close": 4.637,
-      "open": 4.617,
-      "high": 4.64,
-      "low": 4.599,
-      "change_percent": -0.28035367694629887,
-      "volume": 3786928.0,
-      "amount": 1748290757.0,
-      "updated_at": "2026-09-10T14:45:00+08:00",
-      "provider": "akshare",
-      "experimental": true,
-      "delay_note": "免费公开网页来源，可能延迟、中断或发生字段变化，不可作为可靠止损依据。"
+      "message": "AKShare 15分钟线失败: ConnectionError"
     },
     {
       "symbol": "510500.SHH",
-      "name": "中证500ETF南方",
-      "price": 7.752,
-      "previous_close": 7.785,
-      "open": 7.741,
-      "high": 7.794,
-      "low": 7.711,
-      "change_percent": -0.42389210019267987,
-      "volume": 2015447.0,
-      "amount": 1560898250.0,
-      "updated_at": "2026-09-10T14:45:00+08:00",
-      "provider": "akshare",
-      "experimental": true,
-      "delay_note": "免费公开网页来源，可能延迟、中断或发生字段变化，不可作为可靠止损依据。"
+      "message": "AKShare 15分钟线失败: ConnectionError"
     },
     {
       "symbol": "512890.SHH",
-      "name": "红利低波ETF华泰柏瑞",
-      "price": 1.215,
-      "previous_close": 1.211,
-      "open": 1.213,
-      "high": 1.217,
-      "low": 1.206,
-      "change_percent": 0.3303055326176807,
-      "volume": 5132477.0,
-      "amount": 622614034.0,
-      "updated_at": "2026-09-10T14:45:00+08:00",
-      "provider": "akshare",
-      "experimental": true,
-      "delay_note": "免费公开网页来源，可能延迟、中断或发生字段变化，不可作为可靠止损依据。"
+      "message": "AKShare 15分钟线失败: ConnectionError"
     },
     {
       "symbol": "159915.SHZ",
-      "name": "创业板ETF易方达",
-      "price": 3.363,
-      "previous_close": 3.373,
-      "open": 3.345,
-      "high": 3.387,
-      "low": 3.325,
-      "change_percent": -0.29647198339757264,
-      "volume": 10074654.0,
-      "amount": 3384612144.0,
-      "updated_at": "2026-09-10T14:45:00+08:00",
-      "provider": "akshare",
-      "experimental": true,
-      "delay_note": "免费公开网页来源，可能延迟、中断或发生字段变化，不可作为可靠止损依据。"
-    }
-  ],
-  "errors": [
+      "message": "AKShare 15分钟线失败: ConnectionError"
+    },
     {
       "symbol": "518880.SHH",
       "message": "AKShare 15分钟线失败: ConnectionError"
