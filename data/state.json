@@ -54,7 +54,7 @@
   "last_alerts": {
     "510500.SHH:intraday_support_break": "2026-07-20T05:21:49.312906+00:00",
     "510500.SHH:intraday_pullback": "2026-08-24T05:51:11.249959+00:00",
-    "159915.SHZ:intraday_pullback": "2026-08-24T05:51:11.250129+00:00",
+    "159915.SHZ:intraday_pullback": "2026-09-15T06:40:08.009481+00:00",
     "159915.SHZ:intraday_support_break": "2026-07-29T05:19:15.887829+00:00",
     "159915.SHZ:intraday_abnormal_drop": "2026-08-24T05:51:11.250129+00:00",
     "510300.SHH:intraday_pullback": "2026-08-24T05:51:11.249626+00:00",
@@ -69,7 +69,9 @@
     "518880.SHH": 0
   },
   "last_run": "2026-08-26T09:13:17.463444+00:00",
-  "last_intraday_run": "2026-09-11T06:57:34.043091+00:00",
-  "intraday_active": {},
+  "last_intraday_run": "2026-09-15T06:40:01.678427+00:00",
+  "intraday_active": {
+    "159915.SHZ:intraday_pullback": true
+  },
   "last_summary_date": "2026-08-26"
 }
