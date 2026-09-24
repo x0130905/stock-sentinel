@@ -1,6 +1,19 @@
 {
   "alerts": [
     {
+      "id": "c4f7d97f-8f98-4228-9a58-c2676259b77b",
+      "symbol": "159915.SHZ",
+      "name": "创业板ETF易方达",
+      "alert_type": "intraday_pullback",
+      "label": "盘中从高点明显回落",
+      "reason": "当前价较盘中高点 3.392 回落 -2.30%",
+      "price": 3.314,
+      "score": null,
+      "created_at": "2026-09-24T06:43:20.165605+00:00",
+      "sent": false,
+      "simulated": true
+    },
+    {
       "id": "6c22a305-4ece-4306-8f18-0fc2bf69583c",
       "symbol": "159915.SHZ",
       "name": "创业板ETF易方达",
