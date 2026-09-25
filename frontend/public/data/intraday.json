@@ -1,71 +1,34 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-24T06:43:12.870557+00:00",
+  "generated_at": "2026-09-25T06:34:29.156347+00:00",
   "provider": "akshare",
   "experimental": true,
-  "status": "部分失败",
+  "status": "失败",
   "market_open_check": true,
   "interval_minutes": 15,
-  "successful_count": 3,
+  "successful_count": 0,
   "monitored_count": 5,
-  "new_risk_count": 1,
-  "quotes": [
-    {
-      "symbol": "510500.SHH",
-      "name": "中证500ETF南方",
-      "price": 7.659,
-      "previous_close": 7.818,
-      "open": 7.797,
-      "high": 7.807,
-      "low": 7.654,
-      "change_percent": -2.0337682271680757,
-      "volume": 3806338.0,
-      "amount": 2935113310.0,
-      "updated_at": "2026-09-24T14:45:00+08:00",
-      "provider": "akshare",
-      "experimental": true,
-      "delay_note": "免费公开网页来源，可能延迟、中断或发生字段变化，不可作为可靠止损依据。"
-    },
-    {
-      "symbol": "159915.SHZ",
-      "name": "创业板ETF易方达",
-      "price": 3.314,
-      "previous_close": 3.399,
-      "open": 3.382,
-      "high": 3.392,
-      "low": 3.312,
-      "change_percent": -2.500735510444252,
-      "volume": 11712262.0,
-      "amount": 3923909391.0,
-      "updated_at": "2026-09-24T14:45:00+08:00",
-      "provider": "akshare",
-      "experimental": true,
-      "delay_note": "免费公开网页来源，可能延迟、中断或发生字段变化，不可作为可靠止损依据。"
-    },
-    {
-      "symbol": "518880.SHH",
-      "name": "黄金ETF华安",
-      "price": 8.79,
-      "previous_close": 8.897,
-      "open": 8.838,
-      "high": 8.846,
-      "low": 8.786,
-      "change_percent": -1.2026525795212017,
-      "volume": 3881360.0,
-      "amount": 3420425291.0,
-      "updated_at": "2026-09-24T14:45:00+08:00",
-      "provider": "akshare",
-      "experimental": true,
-      "delay_note": "免费公开网页来源，可能延迟、中断或发生字段变化，不可作为可靠止损依据。"
-    }
-  ],
+  "new_risk_count": 0,
+  "quotes": [],
   "errors": [
     {
       "symbol": "510300.SHH",
       "message": "AKShare 15分钟线失败: ConnectionError"
     },
     {
+      "symbol": "510500.SHH",
+      "message": "AKShare 15分钟线失败: ConnectionError"
+    },
+    {
       "symbol": "512890.SHH",
+      "message": "AKShare 15分钟线失败: ConnectionError"
+    },
+    {
+      "symbol": "159915.SHZ",
+      "message": "AKShare 15分钟线失败: ConnectionError"
+    },
+    {
+      "symbol": "518880.SHH",
       "message": "AKShare 15分钟线失败: ConnectionError"
     }
   ],
