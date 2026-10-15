@@ -1,6 +1,58 @@
 {
   "alerts": [
     {
+      "id": "0bd7c6a8-ea6b-4fe5-b820-c59088714a4b",
+      "symbol": "159915.SHZ",
+      "name": "创业板ETF易方达",
+      "alert_type": "intraday_support_break",
+      "label": "盘中跌破日线支撑参考位",
+      "reason": "当前价 2.810，日线支撑 3.182，缓冲 0.5%",
+      "price": 2.81,
+      "score": null,
+      "created_at": "2026-10-15T06:54:55.766815+00:00",
+      "sent": false,
+      "simulated": true
+    },
+    {
+      "id": "c78e1953-18df-4a90-a127-d38a9076b2b7",
+      "symbol": "510500.SHH",
+      "name": "中证500ETF南方",
+      "alert_type": "intraday_abnormal_drop",
+      "label": "盘中异常下跌",
+      "reason": "相对昨收跌幅 -3.03%，阈值 -3.00%",
+      "price": 6.812,
+      "score": null,
+      "created_at": "2026-10-15T06:54:55.766535+00:00",
+      "sent": false,
+      "simulated": true
+    },
+    {
+      "id": "f075b567-0820-4a41-ae62-90c8d671cdfb",
+      "symbol": "510500.SHH",
+      "name": "中证500ETF南方",
+      "alert_type": "intraday_support_break",
+      "label": "盘中跌破日线支撑参考位",
+      "reason": "当前价 6.812，日线支撑 7.220，缓冲 0.5%",
+      "price": 6.812,
+      "score": null,
+      "created_at": "2026-10-15T06:54:55.766513+00:00",
+      "sent": false,
+      "simulated": true
+    },
+    {
+      "id": "ea1166e7-9098-4d91-93a8-b81e96cf8821",
+      "symbol": "510300.SHH",
+      "name": "沪深300ETF华泰柏瑞",
+      "alert_type": "intraday_support_break",
+      "label": "盘中跌破日线支撑参考位",
+      "reason": "当前价 4.239，日线支撑 4.536，缓冲 0.5%",
+      "price": 4.239,
+      "score": null,
+      "created_at": "2026-10-15T06:54:55.766176+00:00",
+      "sent": false,
+      "simulated": true
+    },
+    {
       "id": "c4f7d97f-8f98-4228-9a58-c2676259b77b",
       "symbol": "159915.SHZ",
       "name": "创业板ETF易方达",
