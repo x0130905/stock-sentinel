@@ -1,6 +1,32 @@
 {
   "alerts": [
     {
+      "id": "ad74496a-2893-404c-826c-bb60c612b4cf",
+      "symbol": "159915.SHZ",
+      "name": "创业板ETF易方达",
+      "alert_type": "intraday_pullback",
+      "label": "盘中从高点明显回落",
+      "reason": "当前价较盘中高点 2.850 回落 -2.46%",
+      "price": 2.78,
+      "score": null,
+      "created_at": "2026-10-16T06:20:27.602842+00:00",
+      "sent": false,
+      "simulated": true
+    },
+    {
+      "id": "e26575b8-1f02-4117-b9d3-d04286564c6e",
+      "symbol": "510500.SHH",
+      "name": "中证500ETF南方",
+      "alert_type": "intraday_pullback",
+      "label": "盘中从高点明显回落",
+      "reason": "当前价较盘中高点 6.950 回落 -2.23%",
+      "price": 6.795,
+      "score": null,
+      "created_at": "2026-10-16T06:20:27.602595+00:00",
+      "sent": false,
+      "simulated": true
+    },
+    {
       "id": "0bd7c6a8-ea6b-4fe5-b820-c59088714a4b",
       "symbol": "159915.SHZ",
       "name": "创业板ETF易方达",
