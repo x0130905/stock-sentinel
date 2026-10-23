@@ -60,7 +60,8 @@
     "510300.SHH:intraday_pullback": "2026-08-24T05:51:11.249626+00:00",
     "510300.SHH:intraday_abnormal_drop": "2026-08-19T06:41:39.148229+00:00",
     "510500.SHH:intraday_abnormal_drop": "2026-10-15T06:54:55.766485+00:00",
-    "510300.SHH:intraday_support_break": "2026-10-15T06:54:55.766142+00:00"
+    "510300.SHH:intraday_support_break": "2026-10-15T06:54:55.766142+00:00",
+    "518880.SHH:intraday_support_break": "2026-10-23T06:27:48.231182+00:00"
   },
   "failures": {
     "510300.SHH": 0,
@@ -70,12 +71,12 @@
     "518880.SHH": 0
   },
   "last_run": "2026-08-26T09:13:17.463444+00:00",
-  "last_intraday_run": "2026-10-22T06:33:34.096772+00:00",
+  "last_intraday_run": "2026-10-23T06:27:43.420383+00:00",
   "intraday_active": {
     "510300.SHH:intraday_support_break": true,
     "510500.SHH:intraday_support_break": true,
     "159915.SHZ:intraday_support_break": true,
-    "159915.SHZ:intraday_pullback": true
+    "518880.SHH:intraday_support_break": true
   },
   "last_summary_date": "2026-08-26"
 }
